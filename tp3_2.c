@@ -11,11 +11,12 @@ void minimoMaximo(int matriz[anio][mes]);
 
 int main()
 {
-    int matriz[anio][mes];
+    int matriz[anio][mes], aux1, aux2;
 
     cargarMatriz(matriz);
     mostrarMatriz(matriz);
     promedio(matriz);
+    minimoMaximo(matriz);
 
     return 0;
 }
@@ -67,5 +68,29 @@ void promedio(int matriz[anio][mes])
 
 void minimoMaximo(int matriz[anio][mes])
 {
-    int i, j, mesMinimo, anioMinimo, mesMaximo, anioMaximo;
+    int i, j, mesMinimo = 0, anioMinimo = 0, mesMaximo = 0, anioMaximo = 0, aux1, aux2;
+    aux1 = aux2 = matriz[0][0];
+
+    for(i=0; i<anio; i++)
+    {
+        for(j=0; j<mes; j++)
+        {
+            if(aux1 > matriz[i][j])
+            {
+                aux1 = matriz[i][j];
+                mesMinimo = j;
+                anioMinimo = i;
+            }
+            if(aux2 < matriz[i][j])
+            {
+                aux2 = matriz[i][j];
+                mesMaximo = j;
+                anioMaximo = i;
+            }
+        }
+    }
+
+    printf("\nMaximo y minimo\n");
+    printf("Valor minimo = %d / Anio: %d, Mes: %d\n", aux1, anioMinimo+1, mesMinimo+1);
+    printf("Valor maximo = %d / Anio: %d, Mes: %d", aux2, anioMaximo+1, mesMaximo+1);
 }
