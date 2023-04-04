@@ -5,32 +5,34 @@
 
 int main()
 {
-    int i;
-    char *lista[], *buff;
+    int i, j=1;
+    char *lista[cantidad], *buff;
+    buff = (char *)malloc(50*sizeof(char));
 
-    lista = (char *)malloc(100*sizeof(char));
-
-    for(i=0; i<cantidad; i++)
+    for(i=0; i<cantidad; i+=2)
     {
-        printf("Ingrese el nombre de la persona %d\n", i+1);
-        gets(nuevo);
-        nombre = (char *)malloc((strlen(nuevo)+1)*sizeof(char));
-        strcpy(nombre[i], nuevo);
-        printf("Ingrese el apellido de la persona %d\n", i+1);
-        gets(nuevo);
-        apellido[i] = (char *)malloc(strlen(nuevo)*sizeof(char));
-        strcpy(apellido[i], nuevo);
+        printf("Ingrese el apellido de la persona %d\n", j);
+        gets(buff);
+        lista[i] = (char *)malloc(strlen(buff)*sizeof(char));
+        strcpy(lista[i], buff);
+        printf("Ingrese el nombre de la persona %d\n", j);
+        gets(buff);
+        lista[i+1] = (char *)malloc((strlen(buff)+1)*sizeof(char));
+        strcpy(lista[i+1], buff);
+        j++;
         printf("\n\n");
     }
 
-    free(nuevo);
+    free(buff);
     
-    for(i=0; i<TAMA; i++)
+    j=1;
+    for(i=0; i<cantidad; i+=2)
     {
-        printf("*****Persona %d*****\n", i+1);
-        printf("%s, %s\n\n", apellido[i], nombre[i]);
-        free(nombre[i]);
-        free(apellido[i]);
+        printf("*****Persona %d*****\n", j);
+        printf("%s, %s\n\n", lista[i], lista[i+1]);
+        free(lista[i]);
+        free(lista[i+1]);
+        j++;
     }
 
     return 0;
